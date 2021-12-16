@@ -6,7 +6,7 @@ This project is to shorten long URLS
 
 1. Clone the repository into your machine
 2. Need to have Docker installed on your machine to run this application. (https://docs.docker.com/get-docker/)
-2. Run `docker-compose up` in your terminal under the directory.
+2. Run `docker-compose up` in your terminal under the directory (wait until you see something like `Compiled successfully!`).
 3. Go to `http://localhost:3000/`, you should see the frondend of the application
 4. The backend api url should be `http://localhost:8080/`
 
