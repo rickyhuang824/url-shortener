@@ -123,7 +123,6 @@ const Home = () => {
             (data.shortUrl = `${process.env.REACT_APP_API_URL}${data.shortUrl}`)
         );
         setAllUrls(res.data);
-        console.log(allUrls);
       } catch (err) {
         console.log(err);
       }
