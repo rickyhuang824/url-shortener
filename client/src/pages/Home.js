@@ -24,7 +24,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   background-color: lightgrey;
   width: 80%;
   height: 80%;
@@ -105,8 +104,9 @@ const Home = () => {
     const submitUrl = async () => {
       try {
         const res = await publicRequest.post("/shorten", { url: url });
-        setShortenUrl(`${process.env.REACT_APP_API_URL}/${res.data.shortUrl}`);
+        setShortenUrl(`${process.env.REACT_APP_API_URL}${res.data.shortUrl}`);
         setError("");
+        setUrl("");
       } catch (err) {
         setError(err.response.data);
       }
@@ -120,7 +120,7 @@ const Home = () => {
         const res = await publicRequest.get("/");
         res.data.map(
           (data) =>
-            (data.shortUrl = `${process.env.REACT_APP_API_URL}/${data.shortUrl}`)
+            (data.shortUrl = `${process.env.REACT_APP_API_URL}${data.shortUrl}`)
         );
         setAllUrls(res.data);
         console.log(allUrls);
@@ -130,7 +130,7 @@ const Home = () => {
     };
 
     getAllUrls();
-  });
+  }, [shortenUrl]);
 
   return (
     <Container>
@@ -141,6 +141,7 @@ const Home = () => {
             placeholder="URL"
             type="url"
             onChange={(e) => setUrl(e.target.value)}
+            value={url}
           />
           <Button onClick={handleSumit}>Submit</Button>
         </Form>
@@ -164,21 +165,16 @@ const Home = () => {
             <TableBody>
               {allUrls.map((url) => {
                 return (
-                  <TableRow sx={{ width: 1 }} key={url.id}>
-                    <TableCell
-                      component="a"
-                      scope="row"
-                      href={url.fullUrl}
-                      target="_blank"
-                    >
-                      {url.fullUrl}
+                  <TableRow key={url._id}>
+                    <TableCell component="th" scope="row">
+                      <Link href={url.fullUrl} target="_blank">
+                        {url.fullUrl}
+                      </Link>
                     </TableCell>
-                    <TableCell
-                      component="a"
-                      href={url.shortUrl}
-                      target="_blank"
-                    >
-                      {url.shortUrl}
+                    <TableCell component="th">
+                      <Link href={url.shortUrl} target="_blank">
+                        {url.shortUrl}
+                      </Link>
                     </TableCell>
                   </TableRow>
                 );
