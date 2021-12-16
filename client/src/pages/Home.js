@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { mobile } from "../reponsive";
+import { mobile } from "../responsive";
 import { publicRequest } from "../requestMethods";
 import {
   Table,
